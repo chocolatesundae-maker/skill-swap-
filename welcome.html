@@ -1,0 +1,152 @@
+<?php
+session_start();
+
+// Check if the user is NOT logged in. If not, redirect them to the login page.
+if (!isset($_SESSION['user_id'])) {
+    header("Location: skillswap.php");
+    exit();
+}
+
+$user_name = $_SESSION['full_name'] ?? 'User';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Skill Swap - Profile</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(to bottom, #ff5f3d, #8133ff 60%, #ffffff 100%);
+        color: white;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* NAVBAR */
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+
+    nav .logo {
+        font-weight: 700;
+        font-size: 20px;
+        color: white;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        align-items: center;
+    }
+
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+        color: #ffe27a;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 20px;
+        margin-top: 80px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        font-weight: 800;
+        margin-bottom: 10px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        opacity: 0.9;
+        margin-bottom: 40px;
+    }
+
+    .hero a {
+        background: white;
+        color: #6b4eff;
+        font-weight: bold;
+        padding: 14px 38px;
+        border-radius: 40px;
+        text-decoration: none;
+        transition: 0.3s;
+        font-size: 16px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .hero a:hover {
+        background: #f0e68c;
+        color: #3F2B96;
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            padding: 14px 30px;
+        }
+        nav ul {
+            gap: 15px;
+        }
+        .hero h1 {
+            font-size: 36px;
+        }
+        .hero p {
+            font-size: 16px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">Local Skill Swap</div>
+    <ul>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Browse Skills</a></li>
+        <li><a href="#">Requests</a></li>
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Profile (<?php echo htmlspecialchars($user_name); ?>)</a></li>
+        <li><a href="logout.php">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="hero">
+    <h1>Welcome, <?php echo htmlspecialchars($user_name); ?>!</h1>
+    <p>Manage your skills, connect with others, and grow together</p>
+    <!-- This is the button that links to your profile page -->
+    <a href="profile2.php">View Profile</a>
+</div>
+
+</body>
+</html>
